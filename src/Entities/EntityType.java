@@ -1,5 +1,5 @@
 package Entities;
 
 public enum EntityType {
-    HERBIVORE, PREDATOR, FOOD
+    HERBIVORE, PREDATOR, GRASS, ROCK, TREE
 }

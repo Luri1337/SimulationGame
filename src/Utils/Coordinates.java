@@ -1,4 +1,4 @@
-package Entities;
+package Utils;
 
 import java.util.Objects;
 
@@ -24,5 +24,18 @@ public class Coordinates {
         return Objects.hash(x, y);
     }
 
+    public Coordinates shift (CoordinatesShift shift) {
+        return new Coordinates(x + shift.xShift, y + shift.yShift);
+    }
+
+    public boolean canShift (CoordinatesShift shift) {
+        int newX  = x + shift.xShift;
+        int newY  = y + shift.yShift;
+
+        if((newX < 0) || (newX > 10)) return false;
+        if((newY < 0) || (newY > 10)) return false;
+
+        return true;
+    }
 
 }

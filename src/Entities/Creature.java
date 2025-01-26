@@ -1,5 +1,7 @@
 package Entities;
 
+import Utils.Coordinates;
+
 public abstract class Creature extends Entity {
     int speed;
     int hp;
