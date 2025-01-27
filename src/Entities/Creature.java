@@ -1,6 +1,7 @@
 package Entities;
 
 import Utils.Coordinates;
+import Utils.GameMap;
 
 public abstract class Creature extends Entity {
     int speed;
@@ -12,4 +13,6 @@ public abstract class Creature extends Entity {
         this.hp = hp;
     }
     public Creature(){}
+
+    protected abstract boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map);
 }

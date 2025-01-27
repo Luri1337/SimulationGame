@@ -10,7 +10,6 @@ public class MapConsoleRenderer {
     public static final String RESET = "\033[0m";
 
     public void render(GameMap map){
-        map.setupEntitiesStartPositions();
         for (int y = 10; y >= 1 ; y--) {
             String line = "";
             for (int x = 1; x <= 10; x++) {

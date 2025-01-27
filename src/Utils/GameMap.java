@@ -29,6 +29,7 @@ public class GameMap {
           createEntity(EntityType.ROCK, 1);
           createEntity(EntityType.TREE, 2);
           createEntity(EntityType.GRASS, 2);
+
      }
 
 
@@ -56,6 +57,17 @@ public class GameMap {
               setEntity(entity, coordinates);
               placed++;
           }
+     }
+
+     public void removeEntity(Coordinates coordinates) {
+          map.remove(coordinates);
+     }
+
+     public void moveEntity(Coordinates from, Coordinates to) {
+          Entity entity = getEntity(from);
+
+          removeEntity(from);
+          setEntity(entity, to);
      }
 
      public boolean isSquareEmpty(Coordinates coordinates) {

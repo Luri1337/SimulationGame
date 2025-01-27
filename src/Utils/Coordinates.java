@@ -32,8 +32,8 @@ public class Coordinates {
         int newX  = x + shift.xShift;
         int newY  = y + shift.yShift;
 
-        if((newX < 0) || (newX > 10)) return false;
-        if((newY < 0) || (newY > 10)) return false;
+        if((newX < 1) || (newX > 10)) return false;
+        if((newY < 1) || (newY > 10)) return false;
 
         return true;
     }
