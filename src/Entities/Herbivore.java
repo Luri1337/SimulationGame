@@ -27,6 +27,8 @@ public class Herbivore extends Creature {
 
     @Override
     protected boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {
-        return map.getEntity(coordinates).getClass() != Predator.class;
+        return map.getEntity(coordinates).getClass() != Predator.class
+                || map.getEntity(coordinates).getClass() != Rock.class
+                || map.getEntity(coordinates).getClass() != Tree.class;
     }
 }

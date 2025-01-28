@@ -18,7 +18,8 @@ public class Predator extends Creature {
 
     @Override
     protected boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {
-        return map.isSquareEmpty(coordinates);
+        return map.getEntity(coordinates).getClass() != Rock.class
+                || map.getEntity(coordinates).getClass() != Tree.class;
     }
 
     @Override

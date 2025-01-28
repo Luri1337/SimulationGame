@@ -32,6 +32,7 @@ public class MapConsoleRenderer {
             case "Tree" -> colorizeSprite(" \uD83C\uDF32 ", Color.MAGENTA, GameMap.isSquareDark(entity.coordinates));
             case "Rock" -> colorizeSprite(" \uD83E\uDEA8 ", Color.MAGENTA, GameMap.isSquareDark(entity.coordinates));
             case "Grass" -> colorizeSprite(" \uD83C\uDF31 ", Color.MAGENTA, GameMap.isSquareDark(entity.coordinates));
+            case "EmptyCell" -> colorizeSprite("    ", Color.MAGENTA, GameMap.isSquareDark(entity.coordinates));
             default -> throw new IllegalStateException("Unexpected value: " + entity.getClass().getSimpleName());
         };
 

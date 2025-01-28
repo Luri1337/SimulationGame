@@ -5,7 +5,9 @@ import Utils.Coordinates;
 import Utils.CoordinatesShift;
 import Utils.GameMap;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class Entity{
@@ -16,8 +18,8 @@ public abstract class Entity{
     }
     public Entity() {}
 
-    public Set<Coordinates> getAvailableMoves(GameMap map){
-        Set<Coordinates> result = new HashSet<Coordinates>();
+    public List<Coordinates> getAvailableMoves(GameMap map){
+        List<Coordinates> result = new ArrayList<Coordinates>();
         for(CoordinatesShift shift : getEntityMoves()){
             if(coordinates.canShift(shift)){
                 Coordinates newCoordinates = coordinates.shift(shift);

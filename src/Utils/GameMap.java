@@ -2,7 +2,9 @@ package Utils;
 
 import Entities.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class GameMap {
@@ -24,12 +26,24 @@ public class GameMap {
      }
 
      public void setupEntitiesStartPositions(){
+
           createEntity(EntityType.HERBIVORE, 3);
           createEntity(EntityType.PREDATOR, 3);
           createEntity(EntityType.ROCK, 1);
           createEntity(EntityType.TREE, 2);
           createEntity(EntityType.GRASS, 2);
 
+
+     }
+
+     private void fillMapWithEmptyCells() {
+          for (int x = 1; x <= MAP_WIDTH; x++) {
+               for (int y = 1; y <= MAP_HEIGHT; y++) {
+                    if(isSquareEmpty(new Coordinates(x, y))) {
+                         setEntity(new EmptyCell(new Coordinates(x, y)), new Coordinates(x, y));
+                    }
+               }
+          }
      }
 
 
@@ -78,4 +92,15 @@ public class GameMap {
           return ((coordinates.x + coordinates.y) % 2) == 0;
      }
 
+     public List<Creature> getAllCreatures() {
+          List<Creature> creatures = new ArrayList<>();
+          for (int y = 10; y >= 1 ; y--) {
+               for (int x = 1; x <= 10 ; x++) {
+                    if(map.get(new Coordinates(x, y)) instanceof Creature) {
+                         creatures.add((Creature) map.get(new Coordinates(x, y)));
+                    }
+               }
+          }
+          return creatures;
+     }
 }
