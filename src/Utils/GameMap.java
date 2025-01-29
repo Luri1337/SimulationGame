@@ -33,19 +33,10 @@ public class GameMap {
           createEntity(EntityType.TREE, 2);
           createEntity(EntityType.GRASS, 2);
 
+          fillMapWithEmptyCells();
+
 
      }
-
-     private void fillMapWithEmptyCells() {
-          for (int x = 1; x <= MAP_WIDTH; x++) {
-               for (int y = 1; y <= MAP_HEIGHT; y++) {
-                    if(isSquareEmpty(new Coordinates(x, y))) {
-                         setEntity(new EmptyCell(new Coordinates(x, y)), new Coordinates(x, y));
-                    }
-               }
-          }
-     }
-
 
      private void createEntity(EntityType entityType ,int amount) {
           Random random = new Random();
@@ -78,10 +69,12 @@ public class GameMap {
      }
 
      public void moveEntity(Coordinates from, Coordinates to) {
-          Entity entity = getEntity(from);
+          Creature entity = (Creature) getEntity(from);
 
           removeEntity(from);
           setEntity(entity, to);
+          entity.hasMoved = true;
+
      }
 
      public boolean isSquareEmpty(Coordinates coordinates) {
@@ -103,4 +96,15 @@ public class GameMap {
           }
           return creatures;
      }
+
+     private void fillMapWithEmptyCells() {
+          for (int x = 1; x <= MAP_WIDTH; x++) {
+               for (int y = 1; y <= MAP_HEIGHT; y++) {
+                    if(isSquareEmpty(new Coordinates(x, y))) {
+                         setEntity(new EmptyCell(new Coordinates(x, y)), new Coordinates(x, y));
+                    }
+               }
+          }
+     }
+
 }

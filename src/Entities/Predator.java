@@ -23,6 +23,23 @@ public class Predator extends Creature {
     }
 
     @Override
+    void eat(GameMap map) {
+        for (Coordinates neighbor : getNeighbors(this.coordinates)) {
+            Entity entity = map.getEntity(neighbor);
+            if (entity != null && canEat(entity)) {
+                this.hasMoved = true;
+                entity.hp -= 50;
+            }
+        }
+
+    }
+
+    @Override
+    boolean canEat(Entity entity) {
+        return entity instanceof Herbivore;
+    }
+
+    @Override
     public Set<CoordinatesShift> getEntityMoves() {
         return new HashSet<>(Arrays.asList(
                 new CoordinatesShift(1 ,0),

@@ -31,4 +31,22 @@ public class Herbivore extends Creature {
                 || map.getEntity(coordinates).getClass() != Rock.class
                 || map.getEntity(coordinates).getClass() != Tree.class;
     }
+
+    @Override
+    public void eat(GameMap map) {
+        for (Coordinates neighbor : getNeighbors(this.coordinates)) {
+            Entity entity = map.getEntity(neighbor);
+            if (entity != null && canEat(entity)) {
+                this.hp += 25;
+                entity.hp -= 100;
+                map.moveEntity(this.coordinates, entity.coordinates);
+                this.hasMoved = true;
+            }
+        }
+    }
+
+    @Override
+    boolean canEat(Entity entity) {
+        return entity instanceof Grass;
+    }
 }

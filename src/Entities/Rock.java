@@ -13,6 +13,6 @@ public class Rock extends Entity {
 
     @Override
     public Set<CoordinatesShift> getEntityMoves() {
-        return Set.of();
+        return null;
     }
 }

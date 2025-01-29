@@ -35,7 +35,7 @@ public class BFS {
 
             visited.add(currentPosition);
 
-            for(Coordinates neighbor : getNeighbors(currentPosition)){
+            for(Coordinates neighbor : map.getEntity(currentPosition).getNeighbors(currentPosition)){
                 if(!visited.contains(neighbor)) {
                     visited.add(neighbor);
 
@@ -49,20 +49,5 @@ public class BFS {
         return Collections.emptyList();
     }
 
-    private List<Coordinates> getNeighbors(Coordinates position) {
-        List<Coordinates> neighbors = new ArrayList<>();
-        CoordinatesShift[] direction = {new CoordinatesShift(0,1 ), new CoordinatesShift(1,0),
-        new CoordinatesShift(0,-1 ), new CoordinatesShift(-1,0)};
-
-        for(CoordinatesShift dir : direction) {
-            if(position.canShift(dir)){
-                Coordinates neighbor = position.shift(dir);
-                neighbors.add(neighbor);
-            }
-        }
-
-        return neighbors;
-
-    }
 }
 

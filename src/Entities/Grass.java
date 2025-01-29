@@ -13,6 +13,6 @@ public class Grass extends Entity{
 
     @Override
     public Set<CoordinatesShift> getEntityMoves() {
-        return Set.of();
+        return null;
     }
 }

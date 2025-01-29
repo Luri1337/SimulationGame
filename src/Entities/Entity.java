@@ -12,6 +12,7 @@ import java.util.Set;
 
 public abstract class Entity{
     public Coordinates coordinates;
+    int hp;
 
     public Entity(Coordinates coordinates) {
         this.coordinates = coordinates;
@@ -31,11 +32,27 @@ public abstract class Entity{
         return result;
     }
 
+    public List<Coordinates> getNeighbors(Coordinates position){
+        List<Coordinates> neighbors = new ArrayList<>();
+        CoordinatesShift[] direction = {new CoordinatesShift(0,1 ), new CoordinatesShift(1,0),
+                new CoordinatesShift(0,-1 ), new CoordinatesShift(-1,0)};
+
+        for(CoordinatesShift dir : direction) {
+            if(position.canShift(dir)){
+                Coordinates neighbor = position.shift(dir);
+                neighbors.add(neighbor);
+            }
+        }
+
+        return neighbors;
+    }
+
     private boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {
         return map.isSquareEmpty(coordinates);
     }
 
 
     public abstract Set<CoordinatesShift> getEntityMoves();
+
 
 }

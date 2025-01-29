@@ -23,7 +23,7 @@ public class Actions {
 
                     List<Coordinates> pathToFood = bfs.findShortestPathForEntity(map, currentPos);
                     if (!pathToFood.isEmpty()) {
-                        Coordinates nextMove = pathToFood.getFirst();
+                        Coordinates nextMove = pathToFood.get(1);
                         map.moveEntity(currentPos, nextMove);
                     } else {
                         List<Coordinates> availableMoves = currentEntity.getAvailableMoves(map);
@@ -37,6 +37,17 @@ public class Actions {
         }
         for (Creature creature : map.getAllCreatures()) {
             creature.setHasMoved(false);
+        }
+    }
+
+    public static void eat(Creature creature) {
+        switch (creature.getClass().getSimpleName()){
+            case "Herbivore" -> {
+
+            }
+            case "Predator" -> {
+
+            }
         }
     }
 }
