@@ -17,18 +17,19 @@ public class Actions {
                     Coordinates currentPos = new Coordinates(x, y);
                     Creature currentEntity = (Creature) map.getEntity(currentPos);
 
+                    currentEntity = currentEntity.eat(map);
+
                     if (currentEntity.hasMoved) {
                         continue;
                     }
 
                     List<Coordinates> pathToFood = bfs.findShortestPathForEntity(map, currentPos);
                     if (!pathToFood.isEmpty()) {
-                        Coordinates nextMove = pathToFood.get(1);
-                        map.moveEntity(currentPos, nextMove);
+                        currentEntity.nextMove = pathToFood.get(1);
                     } else {
                         List<Coordinates> availableMoves = currentEntity.getAvailableMoves(map);
                         if (!availableMoves.isEmpty()) {
-                            map.moveEntity(currentPos, availableMoves.getFirst());
+                            currentEntity.nextMove = availableMoves.get(0);
                         }
                     }
 
@@ -36,18 +37,12 @@ public class Actions {
             }
         }
         for (Creature creature : map.getAllCreatures()) {
+            if(creature.hasMoved) {
+                creature.setHasMoved(false);
+               continue;
+            }
+            map.moveEntity(creature.coordinates, creature.nextMove);
             creature.setHasMoved(false);
-        }
-    }
-
-    public static void eat(Creature creature) {
-        switch (creature.getClass().getSimpleName()){
-            case "Herbivore" -> {
-
-            }
-            case "Predator" -> {
-
-            }
         }
     }
 }

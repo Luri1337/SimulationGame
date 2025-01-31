@@ -5,10 +5,7 @@ import Utils.Coordinates;
 import Utils.CoordinatesShift;
 import Utils.GameMap;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class Entity{
     public Coordinates coordinates;
@@ -32,12 +29,16 @@ public abstract class Entity{
         return result;
     }
 
-    public List<Coordinates> getNeighbors(Coordinates position){
+    public List<Coordinates> getNeighbors(Coordinates position, Entity entity, GameMap map){
         List<Coordinates> neighbors = new ArrayList<>();
         CoordinatesShift[] direction = {new CoordinatesShift(0,1 ), new CoordinatesShift(1,0),
                 new CoordinatesShift(0,-1 ), new CoordinatesShift(-1,0)};
 
         for(CoordinatesShift dir : direction) {
+            Coordinates neighborCoordinates = entity.coordinates.shift(dir);
+            if(!entity.isSquareAvailableForMove(neighborCoordinates, map)){
+                continue;
+            }
             if(position.canShift(dir)){
                 Coordinates neighbor = position.shift(dir);
                 neighbors.add(neighbor);
@@ -47,12 +48,17 @@ public abstract class Entity{
         return neighbors;
     }
 
-    private boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {
-        return map.isSquareEmpty(coordinates);
+     abstract boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map);
+
+
+    public Set<CoordinatesShift> getEntityMoves(){
+        return new HashSet<>(Arrays.asList(
+                new CoordinatesShift(1 ,0),
+                new CoordinatesShift(-1, 0),
+                new CoordinatesShift(0, 1),
+                new CoordinatesShift(0, -1)
+        ));
     }
-
-
-    public abstract Set<CoordinatesShift> getEntityMoves();
 
 
 }

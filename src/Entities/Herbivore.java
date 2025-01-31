@@ -15,34 +15,29 @@ public class Herbivore extends Creature {
     }
     public Herbivore() {}
 
-    @Override
-    public Set<CoordinatesShift> getEntityMoves() {
-        return new HashSet<>(Arrays.asList(
-                new CoordinatesShift(1 ,0),
-                new CoordinatesShift(-1, 0),
-                new CoordinatesShift(0, 1),
-                new CoordinatesShift(0, -1)
-        ));
-    }
 
     @Override
     protected boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {
         return map.getEntity(coordinates).getClass() != Predator.class
-                || map.getEntity(coordinates).getClass() != Rock.class
-                || map.getEntity(coordinates).getClass() != Tree.class;
+                && map.getEntity(coordinates).getClass() != Rock.class
+                && map.getEntity(coordinates).getClass() != Tree.class
+                && map.getEntity(coordinates).getClass() != Herbivore.class;
     }
 
     @Override
-    public void eat(GameMap map) {
-        for (Coordinates neighbor : getNeighbors(this.coordinates)) {
+    public Creature eat(GameMap map) {
+        for (Coordinates neighbor : getAvailableMoves(map)) {
             Entity entity = map.getEntity(neighbor);
             if (entity != null && canEat(entity)) {
                 this.hp += 25;
                 entity.hp -= 100;
+                map.generateNewFood();
                 map.moveEntity(this.coordinates, entity.coordinates);
                 this.hasMoved = true;
+                return this;
             }
         }
+        return this;
     }
 
     @Override

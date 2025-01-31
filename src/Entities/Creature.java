@@ -6,6 +6,7 @@ import Utils.GameMap;
 public abstract class Creature extends Entity {
     public boolean hasMoved;
     int speed;
+    public Coordinates nextMove;
 
 
     public Creature(Coordinates coordinates, int speed, int hp) {
@@ -17,7 +18,7 @@ public abstract class Creature extends Entity {
     public Creature(){}
 
     protected abstract boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map);
-    abstract void eat(GameMap map);
+    abstract public Creature eat(GameMap map);
     abstract boolean canEat(Entity entity);
     public void setHasMoved(boolean hasMoved) {
         this.hasMoved = hasMoved;

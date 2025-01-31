@@ -28,7 +28,7 @@ public class Simulation {
             System.out.println();
             renderer.render(map);
             Actions.turnAction(map, bfs);
-            Thread.sleep(4000);
+            Thread.sleep(2000);
             if (map.getMap().isEmpty()){
                 System.out.println("Game Over");
                 return;

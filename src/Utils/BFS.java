@@ -35,7 +35,7 @@ public class BFS {
 
             visited.add(currentPosition);
 
-            for(Coordinates neighbor : map.getEntity(currentPosition).getNeighbors(currentPosition)){
+            for(Coordinates neighbor : map.getEntity(currentPosition).getAvailableMoves(map)){
                 if(!visited.contains(neighbor)) {
                     visited.add(neighbor);
 

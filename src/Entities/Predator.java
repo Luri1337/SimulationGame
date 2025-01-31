@@ -19,33 +19,30 @@ public class Predator extends Creature {
     @Override
     protected boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {
         return map.getEntity(coordinates).getClass() != Rock.class
-                || map.getEntity(coordinates).getClass() != Tree.class;
+                && map.getEntity(coordinates).getClass() != Tree.class
+                && map.getEntity(coordinates).getClass() != Grass.class
+                && map.getEntity(coordinates).getClass() != Predator.class;
     }
 
     @Override
-    void eat(GameMap map) {
-        for (Coordinates neighbor : getNeighbors(this.coordinates)) {
+    public Creature eat(GameMap map) {
+        for (Coordinates neighbor : getAvailableMoves(map)) {
             Entity entity = map.getEntity(neighbor);
             if (entity != null && canEat(entity)) {
                 this.hasMoved = true;
-                entity.hp -= 50;
+                entity.hp -= 100;
+                if(entity.hp <= 0) {
+                    map.removeEntity(entity.coordinates);
+                    map.generateNewHerbivore();
+                }
+                return this;
             }
         }
-
+        return this;
     }
 
     @Override
     boolean canEat(Entity entity) {
         return entity instanceof Herbivore;
-    }
-
-    @Override
-    public Set<CoordinatesShift> getEntityMoves() {
-        return new HashSet<>(Arrays.asList(
-                new CoordinatesShift(1 ,0),
-                new CoordinatesShift(-1, 0),
-                new CoordinatesShift(0, 1),
-                new CoordinatesShift(0, -1)
-        ));
     }
 }

@@ -2,6 +2,7 @@ package Entities;
 
 import Utils.Coordinates;
 import Utils.CoordinatesShift;
+import Utils.GameMap;
 
 import java.util.Set;
 
@@ -12,7 +13,8 @@ public class Tree extends Entity {
     }
 
     @Override
-    public Set<CoordinatesShift> getEntityMoves() {
-        return null;
+    boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {
+        return true;
     }
+
 }

@@ -18,10 +18,5 @@ public class Main {
         simulation.start();
 
         int a = 123;
-
-
-
-
-
     }
 }
