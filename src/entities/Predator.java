@@ -1,20 +1,13 @@
-package Entities;
+package entities;
 
-import Utils.Coordinates;
-import Utils.CoordinatesShift;
-import Utils.GameMap;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import utils.Coordinates;
+import utils.GameMap;
 
 public class Predator extends Creature {
 
     public Predator(Coordinates coordinates, int speed, int hp) {
         super(coordinates, speed, hp);
     }
-
-    public Predator() {}
 
     @Override
     protected boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {

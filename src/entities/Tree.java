@@ -1,10 +1,7 @@
-package Entities;
+package entities;
 
-import Utils.Coordinates;
-import Utils.CoordinatesShift;
-import Utils.GameMap;
-
-import java.util.Set;
+import utils.Coordinates;
+import utils.GameMap;
 
 public class Tree extends Entity {
 

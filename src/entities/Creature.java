@@ -1,7 +1,7 @@
-package Entities;
+package entities;
 
-import Utils.Coordinates;
-import Utils.GameMap;
+import utils.Coordinates;
+import utils.GameMap;
 
 public abstract class Creature extends Entity {
     public boolean hasMoved;

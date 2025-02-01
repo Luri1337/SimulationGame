@@ -1,6 +1,6 @@
-package Utils;
+package utils;
 
-import Entities.*;
+import entities.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,8 +28,8 @@ public class GameMap {
     public void setupEntitiesStartPositions() {
         fillMapWithEmptyCells();
 
-        createEntity(EntityType.HERBIVORE, 1);
-        createEntity(EntityType.PREDATOR, 1);
+        createEntity(EntityType.HERBIVORE, 5);
+        createEntity(EntityType.PREDATOR, 5);
         createEntity(EntityType.ROCK, 10);
         createEntity(EntityType.TREE, 5);
         createEntity(EntityType.GRASS, 5);
@@ -133,7 +133,9 @@ public class GameMap {
             Coordinates coordinates = new Coordinates(x, y);
 
             if (isSquareEmpty(coordinates)) {
-                map.put(coordinates, new Herbivore(coordinates, 1, 100));
+                Creature newHerbivore = new Herbivore(coordinates, 1, 100);
+                newHerbivore.hasMoved = true;
+                map.put(coordinates, newHerbivore);
                 return;
             }
         }

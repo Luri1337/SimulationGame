@@ -1,13 +1,4 @@
-import Entities.Entity;
-import Entities.Predator;
-import Utils.BFS;
-import Utils.Coordinates;
-import Utils.GameMap;
-import Utils.MapConsoleRenderer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import utils.GameMap;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -16,7 +7,5 @@ public class Main {
 
         Simulation simulation = new Simulation(map);
         simulation.start();
-
-        int a = 123;
     }
 }

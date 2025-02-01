@@ -1,7 +1,7 @@
-package Utils;
+package utils;
 
-import Entities.Grass;
-import Entities.Herbivore;
+import entities.Grass;
+import entities.Herbivore;
 
 import java.util.*;
 
