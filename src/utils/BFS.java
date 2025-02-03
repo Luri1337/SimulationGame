@@ -1,7 +1,9 @@
 package utils;
 
+import entities.Entity;
 import entities.Grass;
 import entities.Herbivore;
+import entities.Predator;
 
 import java.util.*;
 
@@ -12,30 +14,21 @@ public class BFS {
 
         queue.add(new PathNode(start, new ArrayList<>()));
 
+        Entity startEntity = map.getEntity(start);
+
         while (!queue.isEmpty()) {
             PathNode current = queue.poll();
             Coordinates currentPosition = current.position;
+            Entity entity = map.getEntity(currentPosition);
 
-            if(map.getEntity(currentPosition) != null) {
-                switch (map.getEntity(start).getClass().getSimpleName()){
-                    case "Predator"-> {
-                        if(map.getEntity(currentPosition).getClass() == Herbivore.class) {
-                            current.path.add(currentPosition);
-                            return current.path;
-                        }
-                    }
-                    case "Herbivore" -> {
-                        if(map.getEntity(currentPosition).getClass() == Grass.class) {
-                            current.path.add(currentPosition);
-                            return current.path;
-                        }
-                    }
-                }
+            if (isTarget(startEntity, entity)) {
+                current.path.add(currentPosition);
+                return current.path;
             }
 
             visited.add(currentPosition);
 
-            for(Coordinates neighbor : map.getEntity(currentPosition).getAvailableMoves(map)){
+            for(Coordinates neighbor : entity.getAvailableMoves(map)){
                 if(!visited.contains(neighbor)) {
                     visited.add(neighbor);
 
@@ -47,6 +40,17 @@ public class BFS {
             }
         }
         return Collections.emptyList();
+    }
+
+    private boolean isTarget(Entity startEntity, Entity targetEntity) {
+        if (startEntity instanceof Predator && targetEntity instanceof Herbivore) {
+            return true;
+        }
+
+        if (startEntity instanceof Herbivore && targetEntity instanceof Grass) {
+            return true;
+        }
+        return false;
     }
 
 }

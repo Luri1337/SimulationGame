@@ -20,30 +20,17 @@ public class Simulation {
     public void simulationLoop() throws InterruptedException {
         new Thread(this::pauseSimulation).start();
         while(true){
-            if (isPaused) {
-                System.out.println("Пауза... Нажмите ENTER, чтобы продолжить.");
-                while (isPaused) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            checkPause();
             System.out.println();
             renderer.render(map);
             Actions.turnAction(map, bfs);
-            if (map.getMap().isEmpty()){
-                System.out.println("Game Over");
-                return;
-            }
         }
     }
 
     public void pauseSimulation(){
         Scanner scanner = new Scanner(System.in);
         while (true){
-            if (scanner.nextLine().equals("")){
+            if (scanner.nextLine().isEmpty()){
                 isPaused = !isPaused;
             }
         }
@@ -51,5 +38,17 @@ public class Simulation {
 
     public GameMap getMap() {
         return map;
+    }
+    private void checkPause(){
+        if (isPaused) {
+            System.out.println("Пауза... Нажмите ENTER, чтобы продолжить.");
+            while (isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -51,8 +51,8 @@ public class GameMap {
             }
             Entity entity;
             switch (entityType) {
-                case HERBIVORE -> entity = new Herbivore(coordinates, 1, 100);
-                case PREDATOR -> entity = new Predator(coordinates, 1, 100);
+                case HERBIVORE -> entity = new Herbivore(coordinates,100);
+                case PREDATOR -> entity = new Predator(coordinates,100);
                 case GRASS -> entity = new Grass(coordinates);
                 case TREE -> entity = new Tree(coordinates);
                 case ROCK -> entity = new Rock(coordinates);
@@ -133,7 +133,7 @@ public class GameMap {
             Coordinates coordinates = new Coordinates(x, y);
 
             if (isSquareEmpty(coordinates)) {
-                Creature newHerbivore = new Herbivore(coordinates, 1, 100);
+                Creature newHerbivore = new Herbivore(coordinates,100);
                 newHerbivore.hasMoved = true;
                 map.put(coordinates, newHerbivore);
                 return;

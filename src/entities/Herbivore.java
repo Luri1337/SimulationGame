@@ -5,8 +5,8 @@ import utils.GameMap;
 
 public class Herbivore extends Creature {
 
-    public Herbivore(Coordinates coordinates, int speed, int hp) {
-        super(coordinates, speed, hp);
+    public Herbivore(Coordinates coordinates, int hp) {
+        super(coordinates, hp);
     }
 
     @Override

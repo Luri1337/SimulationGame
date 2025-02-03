@@ -27,7 +27,7 @@ public class MapConsoleRenderer {
         return switch (entity.getClass().getSimpleName()){
             case "Predator" -> colorizeSprite(" \uD83D\uDC3A ", GameMap.isSquareDark(entity.coordinates));
             case "Herbivore" -> colorizeSprite(" \uD83D\uDC07 ", GameMap.isSquareDark(entity.coordinates));
-            case "Tree" -> colorizeSprite(" \uD83C\uDF32 ", GameMap.isSquareDark(entity.coordinates));
+            case "Tree" -> colorizeSprite(" \uD83C\uDF34 ", GameMap.isSquareDark(entity.coordinates));
             case "Rock" -> colorizeSprite(" \uD83E\uDEA8 ", GameMap.isSquareDark(entity.coordinates));
             case "Grass" -> colorizeSprite(" \uD83C\uDF31 ", GameMap.isSquareDark(entity.coordinates));
             case "EmptyCell" -> colorizeSprite("    ", GameMap.isSquareDark(entity.coordinates));

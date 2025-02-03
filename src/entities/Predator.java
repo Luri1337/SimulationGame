@@ -5,8 +5,8 @@ import utils.GameMap;
 
 public class Predator extends Creature {
 
-    public Predator(Coordinates coordinates, int speed, int hp) {
-        super(coordinates, speed, hp);
+    public Predator(Coordinates coordinates, int hp) {
+        super(coordinates, hp);
     }
 
     @Override
