@@ -1,41 +1,57 @@
 package entities;
 
 import utils.Coordinates;
-import utils.GameMap;
+import utils.GameBoard;
 
 public class Predator extends Creature {
+    private static final int HERBIVORE_DAMAGE_AMOUNT = 100;
 
     public Predator(Coordinates coordinates, int hp) {
         super(coordinates, hp);
     }
 
     @Override
-    protected boolean isSquareAvailableForMove(Coordinates coordinates, GameMap map) {
-        return map.getEntity(coordinates).getClass() != Rock.class
-                && map.getEntity(coordinates).getClass() != Tree.class
-                && map.getEntity(coordinates).getClass() != Grass.class
-                && map.getEntity(coordinates).getClass() != Predator.class;
+    protected boolean isSquareAvailableForMove(Coordinates coordinates, GameBoard map) {
+        try {
+            Object entity = map.getEntity(coordinates);
+
+            return entity.getClass() != Rock.class
+                    && entity.getClass() != Tree.class
+                    && entity.getClass() != Grass.class
+                    && entity.getClass() != Predator.class;
+        } catch (Exception e) {
+            return e.getMessage().equals("Object not found");
+        }
     }
 
     @Override
-    public Creature eat(GameMap map) {
+    public EntityType getEntityType() {
+        return EntityType.PREDATOR;
+    }
+
+    @Override
+    public void eat(GameBoard map) throws Exception {
         for (Coordinates neighbor : getAvailableMoves(map)) {
-            Entity entity = map.getEntity(neighbor);
-            if (entity != null && canEat(entity)) {
-                this.hasMoved = true;
-                entity.hp -= 100;
-                if(entity.hp <= 0) {
-                    map.removeEntity(entity.coordinates);
-                    map.generateNewHerbivore();
+            try{
+                Entity entity = map.getEntity(neighbor);
+                if (entity.getEntityType() == EntityType.HERBIVORE) {
+                    Herbivore herb = (Herbivore) entity;
+                    setHasMoved(true);
+                    herb.setHp(herb.getHp() - HERBIVORE_DAMAGE_AMOUNT);
+                    if(herb.getHp() <= 0) {
+                        this.move(this.getCoordinates(), herb.getCoordinates(), map);
+                        map.setCurrentHerbivoreCount(map.getCurrentHerbivoreCount() - 1);
+                    }
+                    return;
                 }
-                return this;
+            }catch(Exception e){
+                continue;
             }
         }
-        return this;
     }
 
     @Override
-    boolean canEat(Entity entity) {
-        return entity instanceof Herbivore;
+    public EntityType getTargetType() {
+        return EntityType.HERBIVORE;
     }
 }

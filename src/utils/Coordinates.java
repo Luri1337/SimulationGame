@@ -3,12 +3,24 @@ package utils;
 import java.util.Objects;
 
 public class Coordinates {
-    public final Integer x;
-    public final Integer y;
+    private final int x;
+    private final int y;
 
-    public Coordinates(Integer x, Integer y) {
+    public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Coordinates add(Coordinates shift) {
+        return new Coordinates(x + shift.x, y + shift.y);
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
     }
 
     @Override
@@ -23,19 +35,4 @@ public class Coordinates {
     public int hashCode() {
         return Objects.hash(x, y);
     }
-
-    public Coordinates shift (CoordinatesShift shift) {
-        return new Coordinates(x + shift.xShift, y + shift.yShift);
-    }
-
-    public boolean canShift (CoordinatesShift shift) {
-        int newX  = x + shift.xShift;
-        int newY  = y + shift.yShift;
-
-        if((newX < 1) || (newX > 10)) return false;
-        if((newY < 1) || (newY > 10)) return false;
-
-        return true;
-    }
-
 }
